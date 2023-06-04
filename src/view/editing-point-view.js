@@ -139,6 +139,12 @@ export default class EditingPointView {
     this.offers = offers;
   }
 
+  constructor(point, destination, offers) {
+    this.#point = point;
+    this.#destination = destination;
+    this.#offers = offers;
+  }
+
   getTemplate () {
     return createEditingPointTemplate(this.point, this.destination, this.offers);
   }

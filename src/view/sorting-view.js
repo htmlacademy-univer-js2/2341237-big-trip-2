@@ -26,6 +26,7 @@ const createSortingTemplate = () => (
 );
 
 export default class SortingView {
+  #element = null;
   getTemplate () {
     return createSortingTemplate();
   }
