@@ -6,6 +6,7 @@ const createTripEventsTemplate = () => (
 );
 
 export default class TripEventsView {
+  #element = null;
   getTemplate () {
     return createTripEventsTemplate;
   }

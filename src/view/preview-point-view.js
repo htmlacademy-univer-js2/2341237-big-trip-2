@@ -61,6 +61,12 @@ export default class PreviewPointView {
     this.offers = offers;
   }
 
+  constructor(point, destination, offers) {
+    this.#point = point;
+    this.#destination = destination;
+    this.#offers = offers;
+  }
+
   getTemplate () {
     return createPreviewPointTemplate(this.point, this.destination, this.offers);
   }

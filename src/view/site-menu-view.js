@@ -7,7 +7,10 @@ const createSiteMenuTemplate = () => (
 </nav>`
 );
 
+
+
 export default class SiteMenuView {
+  #element = null;
   getTemplate () {
     return createSiteMenuTemplate();
   }
