@@ -1,7 +1,7 @@
 import { render, RenderPosition, remove } from '../framework/render.js';
 import PointsListView from '../view/point-list-view.js';
 import SortingView from '../view/sorting-view.js';
-import NoPointView from '../view/nopoint-view.js';
+import NoPointView from '../view/no-point-view.js';
 import PointPresenter from './points-presenter.js';
 import PointNewPresenter from './new-presenter.js';
 import { sorting } from '../utils/sorting.js';
