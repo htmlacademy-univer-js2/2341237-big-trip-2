@@ -30,4 +30,11 @@ const getTime = (date) => dayjs(date).format(TIME_FORMAT);
 
 const getDateTime = (date) => dayjs(date).format(DATE_TIME_FORMAT);
 
-export { humanizePointDueDate, duration, getDate, getDateTime, getTime };
+const isPointDatePast = (date) => dayjs().diff(date, 'day') > 0;
+
+const isPointDateFuture = (date) => date.diff(dayjs(), 'day') >= 0;
+
+const isPointDateFuturePast = (dateFrom, dateTo) => dayjs().diff(dateFrom, 'day') > 0 && dateTo.diff(dayjs(), 'day') > 0;
+
+
+export { humanizePointDueDate, duration, getDate, getDateTime, getTime, isPointDatePast, isPointDateFuture, isPointDateFuturePast };
