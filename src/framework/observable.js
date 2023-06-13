@@ -1,24 +1,30 @@
+/**
+ * Класс, реализующий паттерн Наблюдатель.
+ */
 export default class Observable {
-  /** @type {Set<observerCallback>}  */
+  /** @type {Set<observerCallback>} Множество функций типа observerCallback */
   #observers = new Set();
 
   /**
-   * @param {observerCallback} observer
+   * Метод, позволяющий подписаться на событие
+   * @param {observerCallback} observer Функция, которая будет вызвана при наступлении события
    */
   addObserver(observer) {
     this.#observers.add(observer);
   }
 
   /**
-   * @param {observerCallback} observer
+   * Метод, позволяющий отписаться от события
+   * @param {observerCallback} observer Функция, которую больше не нужно вызывать при наступлении события
    */
   removeObserver(observer) {
     this.#observers.delete(observer);
   }
 
   /**
-   * @param {*} event
-   * @param {*} payload
+   * Метод для оповещения подписчиков о наступлении события
+   * @param {*} event Тип события
+   * @param {*} payload Дополнительная информация
    */
   _notify(event, payload) {
     this.#observers.forEach((observer) => observer(event, payload));
@@ -26,7 +32,8 @@ export default class Observable {
 }
 
 /**
+ * Функция, которая будет вызвана при наступлении события
  * @callback observerCallback
- * @param {*} event
- * @param {*} [payload]
+ * @param {*} event Тип события
+ * @param {*} [payload] Дополнительная информация
  */
