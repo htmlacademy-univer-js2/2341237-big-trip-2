@@ -1,7 +1,7 @@
 import AbstractStatefulView from '../framework/view/abstract-stateful-view.js';
 import { getDateTime } from '../utils/point.js';
 import { capitalizeValue } from '../utils/common.js';
-import { POINT_TYPES } from '../mock/point.js';
+import { POINT_TYPES } from '../mock/points.js';
 import dayjs from 'dayjs';
 import flatpickr from 'flatpickr';
 import he from 'he';

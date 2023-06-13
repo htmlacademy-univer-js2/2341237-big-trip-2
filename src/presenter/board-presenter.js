@@ -1,9 +1,9 @@
 import { render, RenderPosition, remove } from '../framework/render.js';
-import PointsListView from '../view/points-list-view.js';
+import PointsListView from '../view/point-list-view.js';
 import SortingView from '../view/sorting-view.js';
-import NoPointView from '../view/no-point-view.js';
-import PointPresenter from './point-presenter.js';
-import PointNewPresenter from './point-new-presenter.js';
+import NoPointView from '../view/nopoint-view.js';
+import PointPresenter from './points-presenter.js';
+import PointNewPresenter from './new-presenter.js';
 import { sorting } from '../utils/sorting.js';
 import { filter } from '../utils/filter.js';
 import { UpdateType, UserAction, SortType, FilterType } from '../const.js';

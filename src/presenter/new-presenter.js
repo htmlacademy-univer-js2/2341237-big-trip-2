@@ -1,5 +1,5 @@
 import { render, remove, RenderPosition } from '../framework/render.js';
-import EditingPointView from '../view/editing-point-view.js';
+import EditingPointView from '../view/editing-view.js';
 import {nanoid} from 'nanoid';
 import { UserAction, UpdateType } from '../const.js';
 
