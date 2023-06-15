@@ -1,6 +1,6 @@
 import { render, replace, remove } from '../framework/render.js';
 import PreviewPointView from '../view/preview-view.js';
-import EditingPointView from '../view/editing-view.js';
+import EditingPointView from '../view/edit-view.js';
 import { UserAction, UpdateType } from '../const.js';
 
 const Mode = {

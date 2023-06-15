@@ -1,5 +1,5 @@
 import { render, remove, RenderPosition } from '../framework/render.js';
-import EditingPointView from '../view/editing-view.js';
+import EditingPointView from '../view/edit-view.js';
 import {nanoid} from 'nanoid';
 import { UserAction, UpdateType } from '../const.js';
 
@@ -74,3 +74,4 @@ export default class PointNewPresenter {
     this.destroy();
   };
 }
+
