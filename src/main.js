@@ -4,8 +4,8 @@ import BoardPresenter from './presenter/board-presenter.js';
 import SiteMenuView from './view/menu-view.js';
 import PointsModel from './model/point-model.js';
 import FilterModel from './model/filter-model.js';
-import NewPointButtonView from './view/new-btn-view.js';
-import { getPoints, getDestinations, getOffersByType } from './mock/points.js';
+import NewPointButtonView from './view/new-point-view.js';
+import { getPoints, getDestinations, getOffersByType } from './mock/point.js';
 
 const siteHeaderElement = document.querySelector('.trip-main');
 const siteMainElement = document.querySelector('.page-main');

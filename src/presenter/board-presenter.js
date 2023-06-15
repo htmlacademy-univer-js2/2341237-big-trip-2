@@ -3,8 +3,8 @@ import PointsListView from '../view/point-list-view.js';
 import SortingView from '../view/sorting-view.js';
 import NoPointView from '../view/no-point-view.js';
 import PointPresenter from './points-presenter.js';
-import PointNewPresenter from './new-presenter.js';
-import { sorting } from '../utils/sorting.js';
+import PointNewPresenter from './new-point-presenter.js';
+import { sorting } from '../utils/sorter.js';
 import { filter } from '../utils/filter.js';
 import { UpdateType, UserAction, SortType, FilterType } from '../const.js';
 
