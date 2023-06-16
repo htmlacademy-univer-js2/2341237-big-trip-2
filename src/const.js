@@ -73,7 +73,7 @@ const TimeLimit = {
   UPPER_LIMIT: 1000,
 };
 
-const AUTHORIZATION = 'Basic tS7JfS3504fpubd6';
+const AUTHORIZATION = 'Basic 5277a72b2eaaf1eca0ed';
 const END_POINT = 'https://18.ecmascript.pages.academy/big-trip';
 
 export { UserAction, UpdateType, FilterType, SortType, SortTypeDescription, PointType, PointTypeDescription, SORT_TYPES_DISABLED,
