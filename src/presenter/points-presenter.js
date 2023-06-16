@@ -1,5 +1,5 @@
 import { render, replace, remove } from '../framework/render.js';
-import PreviewPointView from '../view/preview-point-view.js';
+import PreviewPointView from '../view/preview-view.js';
 import PointView from '../view/point-view.js';
 import { UserAction, UpdateType } from '../const.js';
 

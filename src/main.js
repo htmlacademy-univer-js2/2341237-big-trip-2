@@ -1,10 +1,10 @@
 import { render } from './framework/render.js';
 import FilterPresenter from './presenter/filter-presenter.js';
 import BoardPresenter from './presenter/board-presenter.js';
-import SiteMenuView from './view/site-menu-view.js';
-import PointsModel from './model/points-model.js';
+import SiteMenuView from './view/menu-view.js';
+import PointsModel from './model/point-model.js';
 import FilterModel from './model/filters-model.js';
-import NewPointButtonView from './view/new-point-button-view.js';
+import NewPointButtonView from './view/new-point-view.js';
 import DestinationsModel from './model/destinations-model.js';
 import OffersModel from './model/offers-model.js';
 import PointsApiService from './api-service/point-api-service.js';
