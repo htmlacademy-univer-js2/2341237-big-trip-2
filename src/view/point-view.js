@@ -328,8 +328,6 @@ export default class PointView extends AbstractStatefulView {
     this._callback.resetClick(PointView.parseStateToPoint(this._state));
   };
 
-
-
   static parseStateToPoint = (state) => {
     const point = {...state};
     delete point.isDisabled;

@@ -74,6 +74,5 @@ const TimeLimit = {
   UPPER_LIMIT: 1000,
 };
 
-
 export { UserAction, UpdateType, FilterType, SortType, SortTypeDescription, PointType, PointTypeDescription, SORT_TYPES_DISABLED,
   ApiServiceResponseMethod, AUTHORIZATION, END_POINT, TimeLimit };
