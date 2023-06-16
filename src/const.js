@@ -1,5 +1,3 @@
-
-
 const SORT_TYPES_DISABLED = ['event', 'offer'];
 
 const UserAction = {
