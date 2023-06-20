@@ -1,29 +1,32 @@
 import { render } from '../framework/render.js';
-import NewPointButtonView from '../view/new-point-view.js';
+import NewPointBtnView from '../view/new-point-view.js';
 
-export default class NewPointButtonPresenter {
+export default class NewPointBtnPresenter {
   #newPointButtonContainer = null;
   #destinationsModel = null;
+  #pointsModel = null;
   #offersModel = null;
   #boardPresenter = null;
-
   #newPointButtonComponent = null;
 
-  constructor({newPointButtonContainer, destinationsModel, offersModel, boardPresenter}) {
+  constructor({newPointButtonContainer, destinationsModel, pointsModel, offersModel, boardPresenter}) {
     this.#newPointButtonContainer = newPointButtonContainer;
     this.#destinationsModel = destinationsModel;
+    this.#pointsModel = pointsModel;
     this.#offersModel = offersModel;
     this.#boardPresenter = boardPresenter;
   }
 
   init() {
-    this.#newPointButtonComponent = new NewPointButtonView();
+    this.#newPointButtonComponent = new NewPointBtnView();
   }
 
   renderNewPointButton = () => {
     render(this.#newPointButtonComponent, this.#newPointButtonContainer);
     this.#newPointButtonComponent.setClickHandler(this.#handleNewPointButtonClick);
-    if (this.#offersModel.offers.length === 0 || this.#destinationsModel.destinations.length === 0) {
+    if (this.#offersModel.offers.length === 0 || this.#offersModel.isSuccessfulLoading === false ||
+      this.#destinationsModel.destinations.length === 0 || this.#destinationsModel.isSuccessfulLoading === false ||
+      this.#pointsModel.isSuccessfulLoading === false) {
       this.#newPointButtonComponent.element.disabled = true;
     }
   };

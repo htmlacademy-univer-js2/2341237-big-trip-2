@@ -1,5 +1,5 @@
 import AbstractView from '../framework/view/abstract-view.js';
-import {humanizePointDueDate, duration, getDate, getTime } from '../utils/point.js';
+import {humanizePointDueDate, getDuration, getDate, getTime } from '../utils/point.js';
 import he from 'he';
 
 const renderOffers = (allOffers, checkedOffers) => {
@@ -15,10 +15,10 @@ const renderOffers = (allOffers, checkedOffers) => {
   return result;
 };
 
-const createPreviewPointTemplate = (point, destinations, allOffers) => {
+const createPreviewTemplate = (point, destinations, allOffers) => {
   const {basePrice, type, destination, isFavorite, dateFrom, dateTo, offers} = point;
   const allPointTypeOffers = allOffers.find((offer) => offer.type === type);
-  const eventDuration = duration(dateFrom, dateTo);
+  const eventDuration = getDuration(dateFrom, dateTo);
   const startDate = dateFrom !== null ? humanizePointDueDate(dateFrom) : '';
   const endDate = dateTo !== null ? humanizePointDueDate(dateTo) : '';
   const destinationData = destinations.find((item) => item.id === destination);
@@ -59,7 +59,7 @@ const createPreviewPointTemplate = (point, destinations, allOffers) => {
   );
 };
 
-export default class PreviewPointView extends AbstractView {
+export default class PreviewView extends AbstractView {
   #point = null;
   #destination = null;
   #offers = null;
@@ -72,7 +72,7 @@ export default class PreviewPointView extends AbstractView {
   }
 
   get template () {
-    return createPreviewPointTemplate(this.#point, this.#destination, this.#offers);
+    return createPreviewTemplate(this.#point, this.#destination, this.#offers);
   }
 
   setEditClickHandler = (callback) => {

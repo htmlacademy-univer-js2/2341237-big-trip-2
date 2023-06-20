@@ -1,13 +1,12 @@
 import { render, remove } from '../framework/render.js';
 import TripInfoView from '../view/info-view.js';
 
-export default class TripInfoPresenter {
+export default class InfoPresenter {
   #points = null;
   #tripInfoComponent = null;
   #tripInfoContainer = null;
   #destinationsModel = null;
   #offersModel = null;
-
   #destinations = null;
   #offers = null;
 
@@ -16,6 +15,10 @@ export default class TripInfoPresenter {
     this.#destinationsModel = destinationsModel;
     this.#offersModel = offersModel;
   }
+
+  destroy = () => {
+    remove(this.#tripInfoComponent);
+  };
 
   init = (points) => {
     this.#points = points;
@@ -27,8 +30,6 @@ export default class TripInfoPresenter {
     render(this.#tripInfoComponent, this.#tripInfoContainer);
   };
 
-  destroy = () => {
-    remove(this.#tripInfoComponent);
-  };
+
 }
 
