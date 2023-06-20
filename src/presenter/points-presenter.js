@@ -1,5 +1,5 @@
 import { render, replace, remove } from '../framework/render.js';
-import PreviewPointView from '../view/preview-view.js';
+import PreviewView from '../view/preview-view.js';
 import PointView from '../view/point-view.js';
 import { UserAction, UpdateType } from '../const.js';
 
@@ -8,10 +8,11 @@ const Mode = {
   EDITING: 'editing',
 };
 
-export default class PointPresenter {
+export default class PointsPresenter {
   #pointListContainer = null;
   #previewPointComponent = null;
   #editingPointComponent = null;
+
   #destinationsModel = null;
   #offersModel = null;
 
@@ -36,14 +37,12 @@ export default class PointPresenter {
     this.#point = point;
     this.#destinations = [...this.#destinationsModel.destinations];
     this.#offers = [...this.#offersModel.offers];
-
     const prevPreviewPointComponent = this.#previewPointComponent;
     const prevEditingPointComponent =  this.#editingPointComponent;
-
-    this.#previewPointComponent = new PreviewPointView(point, this.#destinations, this.#offers);
+    this.#previewPointComponent = new PreviewView(point, this.#destinations, this.#offers);
     this.#editingPointComponent = new PointView({
       point: point,
-      destination: this.#destinations,
+      destinations: this.#destinations,
       offers: this.#offers,
       isNewPoint: false
     });
@@ -73,6 +72,15 @@ export default class PointPresenter {
     remove(prevEditingPointComponent);
   }
 
+  setAborting = () => {
+    if (this.#mode === Mode.PREVIEW) {
+      this.#previewPointComponent.shake();
+      return;
+    }
+
+    this.#editingPointComponent.shake(this.#resetFormState);
+  };
+
   destroy = () => {
     remove(this.#previewPointComponent);
     remove(this.#editingPointComponent);
@@ -101,15 +109,6 @@ export default class PointPresenter {
         isDeleting: true,
       });
     }
-  };
-
-  setAborting = () => {
-    if (this.#mode === Mode.PREVIEW) {
-      this.#previewPointComponent.shake();
-      return;
-    }
-
-    this.#editingPointComponent.shake(this.#resetFormState);
   };
 
   #resetFormState = () => {

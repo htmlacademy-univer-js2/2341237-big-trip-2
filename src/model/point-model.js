@@ -1,47 +1,38 @@
 import Observable from '../framework/observable.js';
 import { UpdateType } from '../const.js';
-import dayjs from 'dayjs';
 
-export default class PointsModel extends Observable{
-  #pointsApiService = null;
+export default class PointModel extends Observable{
   #points = [];
-  #offers = [];
-  #destinations = [];
+  #pointsApiService = null;
+  #isSuccessfulLoading = false;
 
   constructor(pointsApiService) {
     super();
     this.#pointsApiService = pointsApiService;
   }
 
-  get points () {
-    return this.#points;
-  }
-
-  get offers () {
-    return this.#offers;
-  }
-
-  get destinations () {
-    return this.#destinations;
-  }
-
   init = async () => {
     try {
       const points = await this.#pointsApiService.points;
       this.#points = points.map(this.#adaptToClient);
-      this.#offers = await this.#pointsApiService.offers;
-      this.#destinations = await this.#pointsApiService.destinations;
+      this.#isSuccessfulLoading = true;
     } catch(err) {
       this.#points = [];
-      this.#offers = [];
-      this.#destinations = [];
+      this.#isSuccessfulLoading = false;
     }
 
     this._notify(UpdateType.INIT);
   };
 
-  updatePoint = async (updateType, update) => {
+  get points() {
+    return this.#points;
+  }
 
+  get isSuccessfulLoading() {
+    return this.#isSuccessfulLoading;
+  }
+
+  updatePoint = async (updateType, update) => {
     const index = this.#points.findIndex((point) => point.id === update.id);
 
     if (index === -1) {
@@ -51,32 +42,23 @@ export default class PointsModel extends Observable{
     try {
       const response = await this.#pointsApiService.updatePoint(update);
       const updatedPoint = this.#adaptToClient(response);
-
       this.#points = [
         ...this.#points.slice(0, index),
         updatedPoint,
         ...this.#points.slice(index + 1),
       ];
-
       this._notify(updateType, updatedPoint);
-
     } catch(err) {
       throw new Error('Can\'t update point');
     }
   };
 
   addPoint = async (updateType, update) => {
-
     try {
       const response = await this.#pointsApiService.addPoint(update);
       const newPoint = this.#adaptToClient(response);
-
-      this.#points = [
-        newPoint,
-        ...this.#points,
-      ];
-      this._notify(updateType, update);
-
+      this.#points.unshift(newPoint);
+      this._notify(updateType, newPoint);
     } catch(err) {
       throw new Error('Can\'t add point');
     }
@@ -102,11 +84,10 @@ export default class PointsModel extends Observable{
   };
 
   #adaptToClient = (point) => {
-
     const adaptedPoint = {...point,
       basePrice: point['base_price'],
-      startDate: dayjs(point['date_from']),
-      endDate: dayjs(point['date_to']),
+      dateFrom: (point['date_from'] !== null || point['date_from'] !== undefined) ? new Date(point['date_from']) : point['date_from'],
+      dateTo: (point['date_to'] !== null || point['date_to'] !== undefined) ? new Date(point['date_to']) : point['date_to'],
       isFavorite: point['is_favorite'],
     };
 
@@ -117,5 +98,4 @@ export default class PointsModel extends Observable{
 
     return adaptedPoint;
   };
-
 }

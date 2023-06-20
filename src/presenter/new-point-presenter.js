@@ -2,17 +2,28 @@ import { render, remove, RenderPosition } from '../framework/render.js';
 import PointView from '../view/point-view.js';
 import { UserAction, UpdateType } from '../const.js';
 
-export default class PointNewPresenter {
+export default class NewPointPresenter {
+  #destinationsModel = null;
+  #offersModel = null;
+  #destinations = null;
+  #offers = null;
   #pointListContainer = null;
   #creatingPointComponent = null;
   #changeData = null;
   #destroyCallback = null;
 
-  #destinationsModel = null;
-  #offersModel = null;
+  destroy = () => {
+    if (this.#creatingPointComponent === null) {
+      return;
+    }
 
-  #destinations = null;
-  #offers = null;
+    this.#destroyCallback?.();
+
+    remove(this.#creatingPointComponent);
+    this.#creatingPointComponent = null;
+
+    document.removeEventListener('keydown', this.#escKeyDownHandler);
+  };
 
   constructor({pointListContainer, changeData, destinationsModel, offersModel}) {
     this.#pointListContainer = pointListContainer;
@@ -31,7 +42,7 @@ export default class PointNewPresenter {
     this.#offers = [...this.#offersModel.offers];
 
     this.#creatingPointComponent = new PointView({
-      destination: this.#destinations,
+      destinations: this.#destinations,
       offers: this.#offers,
       isNewPoint: true
     });
@@ -43,18 +54,7 @@ export default class PointNewPresenter {
     document.addEventListener('keydown', this.#escKeyDownHandler);
   };
 
-  destroy = () => {
-    if (this.#creatingPointComponent === null) {
-      return;
-    }
 
-    this.#destroyCallback?.();
-
-    remove(this.#creatingPointComponent);
-    this.#creatingPointComponent = null;
-
-    document.removeEventListener('keydown', this.#escKeyDownHandler);
-  };
 
   setSaving = () => {
     this.#creatingPointComponent.updateElement({
@@ -65,6 +65,10 @@ export default class PointNewPresenter {
 
   setAborting = () => {
     this.#creatingPointComponent.shake(this.#resetFormState);
+  };
+
+  #handleResetClick = () => {
+    this.destroy();
   };
 
   #resetFormState = () => {
@@ -82,9 +86,7 @@ export default class PointNewPresenter {
     }
   };
 
-  #handleResetClick = () => {
-    this.destroy();
-  };
+
 
   #handleFormSubmit = (point) => {
     this.#changeData(

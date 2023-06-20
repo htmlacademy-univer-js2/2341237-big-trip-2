@@ -7,14 +7,16 @@ export default class FilterPresenter {
   #filterContainer = null;
   #filterModel = null;
   #pointsModel = null;
-
+  #offersModel = null;
+  #destinationsModel = null;
   #filterComponent = null;
 
-  constructor({filterContainer, pointsModel, filterModel}) {
+  constructor({filterContainer, pointsModel, destinationsModel, offersModel, filterModel}) {
     this.#filterContainer = filterContainer;
     this.#filterModel = filterModel;
     this.#pointsModel = pointsModel;
-
+    this.#destinationsModel = destinationsModel;
+    this.#offersModel = offersModel;
     this.#pointsModel.addObserver(this.#handleModelEvent);
     this.#filterModel.addObserver(this.#handleModelEvent);
   }
@@ -57,15 +59,20 @@ export default class FilterPresenter {
     remove(prevFilterComponent);
   };
 
-  #handleModelEvent = () => {
-    this.init();
-  };
-
   #handleFilterTypeChange = (filterType) => {
     if (this.#filterModel.filter === filterType) {
       return;
     }
 
     this.#filterModel.setFilter(UpdateType.MAJOR, filterType);
+  };
+
+  #handleModelEvent = () => {
+    if (this.#offersModel.offers.length === 0 || this.#offersModel.isSuccessfulLoading === false ||
+      this.#destinationsModel.destinations.length === 0 || this.#destinationsModel.isSuccessfulLoading === false ||
+      this.#pointsModel.isSuccessfulLoading === false) {
+      return;
+    }
+    this.init();
   };
 }
